@@ -12,7 +12,7 @@ import java.util.List;
 @ApplicationScoped
 public class ClientRepository implements Repository<Client> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "postgres")
     private EntityManager entityManager;
 
     @Transactional

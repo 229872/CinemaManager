@@ -1,9 +1,6 @@
 package pl.bdygasinski.model;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -29,6 +26,7 @@ public class Client extends AbstractEntity {
     private String name;
     @Column(name = "last_name")
     private String lastName;
+    @Embedded
     private Address address;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
@@ -58,9 +56,4 @@ public class Client extends AbstractEntity {
         Period period = dateOfBirth.until(LocalDate.now());
         return period.getYears();
     }
-
-
-
-
-
 }

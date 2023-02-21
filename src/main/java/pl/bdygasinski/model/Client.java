@@ -35,6 +35,15 @@ public class Client extends AbstractEntity {
     @Column(name = "creation_of_account_date")
     private LocalDate creationOfAccountDate;
 
+    public Client(String login, String password, String name, String lastName,
+                  Address address, LocalDate dateOfBirth) {
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastName;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+    }
 
     @PrePersist
     public void init() {

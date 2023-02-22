@@ -1,6 +1,8 @@
 package pl.bdygasinski.rest;
 
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -27,7 +29,7 @@ public class ClientRest {
     }
 
     @POST
-    public Response createClient(ClientInputDTO dto) {
+    public Response createClient(@NotNull @Valid ClientInputDTO dto) {
         try {
             ClientOutputDTO client = clientManager.createClient(dto);
 

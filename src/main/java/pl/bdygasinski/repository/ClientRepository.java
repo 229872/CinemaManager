@@ -3,6 +3,7 @@ package pl.bdygasinski.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
 import org.hibernate.cfg.NotYetImplementedException;
 import pl.bdygasinski.model.Client;
@@ -37,12 +38,13 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
-    public Client findById(Long id) {
+    public Client findById(Long id) throws PersistenceException {
         return entityManager.find(Client.class, id);
     }
 
     @Override
     public List<Client> getAll() {
-        throw new NotYetImplementedException();
+        return entityManager.createNamedQuery(Client.GET_ALL, Client.class)
+                .getResultList();
     }
 }

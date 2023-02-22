@@ -18,8 +18,9 @@ import java.time.Period;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
+@NamedQuery(name = Client.GET_ALL, query = "SELECT client FROM Client client")
 public class Client extends AbstractEntity {
-
+    public static final String GET_ALL = "Client.getAll";
     @Column(unique = true, nullable = false, updatable = false)
     private String login;
     private String password;

@@ -37,9 +37,12 @@ public class ClientInputDTO {
     private String street;
     @NotNull(message = "Number of house cannot be null")
     private int numberOfHouse;
+    @NotBlank(message = "Number cannot be empty")
+    @Size(min = 9, max = 9, message = "Phone number must be build from 9 digits")
+    private String phoneNumber;
 
     public Client createClient() {
         return new Client(login, password, name, lastName,
-                new Address(country, city, street, numberOfHouse), dateOfBirth);
+                new Address(country, city, street, numberOfHouse), dateOfBirth, phoneNumber);
     }
 }

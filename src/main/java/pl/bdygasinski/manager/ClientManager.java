@@ -26,7 +26,7 @@ public class ClientManager {
             repository.add(client);
             return new ClientOutputDTO(client);
         } catch (TransactionalException e) {
-            throw new ClientNotValidException("Login is already in use", e.getCause());
+            throw new ClientNotValidException("Login or phone number is already in use", e.getCause());
         }
 
     }
@@ -56,7 +56,7 @@ public class ClientManager {
         }
     }
 
-    public ClientOutputDTO updateClient(Long id, ClientUpdateDTO dto) throws ClientNotFoundManagerException {
+    public ClientOutputDTO updateClient(Long id, ClientUpdateDTO dto) throws ClientNotFoundManagerException, ClientNotValidException {
         try {
             Client client = repository.findById(id);
             client = dto.updateClient(client);
@@ -65,6 +65,9 @@ public class ClientManager {
             return new ClientOutputDTO(updated);
         } catch (ClientNotFoundRepositoryException e) {
             throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
+
+        } catch (TransactionalException e) {
+            throw new ClientNotValidException("Login or phone number is already in use", e.getCause());
         }
     }
 }

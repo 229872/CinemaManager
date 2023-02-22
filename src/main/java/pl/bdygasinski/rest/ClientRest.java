@@ -78,6 +78,9 @@ public class ClientRest {
         } catch (ClientNotFoundManagerException e) {
 
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        } catch (ClientNotValidException e) {
+
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
         }
     }
 }

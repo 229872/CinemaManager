@@ -25,6 +25,8 @@ public class ClientUpdateDTO {
     private String city;
     private String street;
     private Integer numberOfHouse;
+    @Size(min = 9, max = 9, message = "Phone number must be build from 9 digits")
+    private String phoneNumber;
 
     public Client updateClient(Client client) {
         setValues(client);
@@ -36,7 +38,14 @@ public class ClientUpdateDTO {
         updateName(client);
         updateLastName(client);
         updateDateOfBirth(client);
+        updatePhoneNumber(client);
         updateAddress(client);
+    }
+
+    private void updatePhoneNumber(Client client) {
+        if (phoneNumber != null) {
+            client.setPhoneNumber(phoneNumber);
+        }
     }
 
     private void updateAddress(Client client) {

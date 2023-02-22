@@ -17,6 +17,7 @@ public class ClientOutputDTO {
     private LocalDate dateOfBirth;
     private String country;
     private String city;
+    private String phoneNumber;
 
     public ClientOutputDTO(Client client) {
         this.id = client.getId();
@@ -25,5 +26,6 @@ public class ClientOutputDTO {
         this.dateOfBirth = client.getDateOfBirth();
         this.city = client.getCity();
         this.country = client.getCountry();
+        this.phoneNumber = client.getPhoneNumber();
     }
 }

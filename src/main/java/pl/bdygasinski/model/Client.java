@@ -25,6 +25,8 @@ public class Client extends AbstractEntity {
     private String name;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "phone_number", unique = true, nullable = false)
+    private String phoneNumber;
     @Embedded
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
@@ -36,13 +38,14 @@ public class Client extends AbstractEntity {
     private LocalDate creationOfAccountDate;
 
     public Client(String login, String password, String name, String lastName,
-                  Address address, LocalDate dateOfBirth) {
+                  Address address, LocalDate dateOfBirth, String phoneNumber) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.lastName = lastName;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
+        this.phoneNumber = phoneNumber;
     }
 
     @PrePersist

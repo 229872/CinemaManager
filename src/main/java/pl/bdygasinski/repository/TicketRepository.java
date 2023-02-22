@@ -6,26 +6,26 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
 import pl.bdygasinski.exception.repository.EntityNotFoundException;
-import pl.bdygasinski.exception.repository.MovieNotFoundRepositoryException;
-import pl.bdygasinski.model.Movie;
+import pl.bdygasinski.exception.repository.TicketNotFoundRepositoryException;
+import pl.bdygasinski.model.Ticket;
 
 import java.util.List;
 
 @ApplicationScoped
-public class MovieRepository implements Repository<Movie> {
+public class TicketRepository implements Repository<Ticket> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
     @Override
-    public void add(Movie entity) {
+    public void add(Ticket entity) {
         entityManager.persist(entity);
     }
 
     @Transactional
     @Override
-    public void delete(Movie entity) {
+    public void delete(Ticket entity) {
         if (!entityManager.contains(entity)) {
             entity = entityManager.merge(entity);
         }
@@ -34,25 +34,26 @@ public class MovieRepository implements Repository<Movie> {
 
     @Transactional
     @Override
-    public Movie update(Movie entity) {
+    public Ticket update(Ticket entity) {
         return entityManager.merge(entity);
     }
 
     @Override
-    public Movie findById(Long id) throws MovieNotFoundRepositoryException {
+    public Ticket findById(Long id) throws TicketNotFoundRepositoryException {
         try {
-            return entityManager.createNamedQuery(Movie.FIND_BY_ID, Movie.class)
+            return entityManager.createNamedQuery(Ticket.FIND_BY_ID, Ticket.class)
                     .setParameter("id", id)
                     .getSingleResult();
 
         } catch (PersistenceException e) {
-            throw new MovieNotFoundRepositoryException("Movie not found", e.getCause());
+            throw new TicketNotFoundRepositoryException("Ticket not found", e.getCause());
         }
+
     }
 
     @Override
-    public List<Movie> getAll() {
-        return entityManager.createNamedQuery(Movie.GET_ALL, Movie.class)
+    public List<Ticket> getAll() {
+        return entityManager.createNamedQuery(Ticket.GET_ALL, Ticket.class)
                 .getResultList();
     }
 }

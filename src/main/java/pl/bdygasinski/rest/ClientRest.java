@@ -8,6 +8,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pl.bdygasinski.dto.ClientInputDTO;
 import pl.bdygasinski.dto.ClientOutputDTO;
+import pl.bdygasinski.dto.ClientUpdateDTO;
 import pl.bdygasinski.exception.manager.ClientNotFoundManagerException;
 import pl.bdygasinski.exception.manager.ClientNotValidException;
 import pl.bdygasinski.manager.ClientManager;
@@ -59,6 +60,19 @@ public class ClientRest {
     public Response findClientById(@PathParam("id") Long id) {
         try {
             ClientOutputDTO client = clientManager.findClientById(id);
+
+            return Response.ok(client).build();
+        } catch (ClientNotFoundManagerException e) {
+
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Response updateClient(@PathParam("id") Long id, @NotNull @Valid ClientUpdateDTO dto) {
+        try {
+            ClientOutputDTO client = clientManager.updateClient(id, dto);
 
             return Response.ok(client).build();
         } catch (ClientNotFoundManagerException e) {

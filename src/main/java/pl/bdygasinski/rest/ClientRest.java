@@ -6,6 +6,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pl.bdygasinski.dto.ClientInputDTO;
 import pl.bdygasinski.dto.ClientOutputDTO;
+import pl.bdygasinski.exception.ClientNotValidException;
 import pl.bdygasinski.manager.ClientManager;
 
 import java.util.List;
@@ -27,8 +28,13 @@ public class ClientRest {
 
     @POST
     public Response createClient(ClientInputDTO dto) {
-        ClientOutputDTO client = clientManager.createClient(dto);
+        try {
+            ClientOutputDTO client = clientManager.createClient(dto);
 
-        return Response.status(Response.Status.CREATED).entity(client).build();
+            return Response.status(Response.Status.CREATED).entity(client).build();
+        } catch (ClientNotValidException e) {
+
+            return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
     }
 }

@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import jakarta.transaction.TransactionalException;
 import org.hibernate.cfg.NotYetImplementedException;
 import pl.bdygasinski.model.Client;
 

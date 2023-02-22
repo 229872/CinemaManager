@@ -3,10 +3,8 @@ package pl.bdygasinski.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.Delegate;
 import pl.bdygasinski.model.submodel.Address;
 
 import java.time.LocalDate;
@@ -28,6 +26,9 @@ public class Client extends AbstractEntity {
     @Column(name = "last_name")
     private String lastName;
     @Embedded
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    @Delegate
     private Address address;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;

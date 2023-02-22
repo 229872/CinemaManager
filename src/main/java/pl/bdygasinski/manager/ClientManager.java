@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.transaction.TransactionalException;
 import pl.bdygasinski.dto.ClientInputDTO;
 import pl.bdygasinski.dto.ClientOutputDTO;
+import pl.bdygasinski.dto.ClientUpdateDTO;
 import pl.bdygasinski.exception.manager.ClientNotFoundManagerException;
 import pl.bdygasinski.exception.manager.ClientNotValidException;
 import pl.bdygasinski.exception.repository.ClientNotFoundRepositoryException;
@@ -50,6 +51,18 @@ public class ClientManager {
             Client client = repository.findById(id);
 
             return new ClientOutputDTO(client);
+        } catch (ClientNotFoundRepositoryException e) {
+            throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
+        }
+    }
+
+    public ClientOutputDTO updateClient(Long id, ClientUpdateDTO dto) throws ClientNotFoundManagerException {
+        try {
+            Client client = repository.findById(id);
+            client = dto.updateClient(client);
+            Client updated = repository.update(client);
+
+            return new ClientOutputDTO(updated);
         } catch (ClientNotFoundRepositoryException e) {
             throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
         }

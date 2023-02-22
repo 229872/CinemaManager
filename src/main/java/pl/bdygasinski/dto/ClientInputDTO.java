@@ -35,11 +35,11 @@ public class ClientInputDTO {
     private String city;
     @NotBlank(message = "Street cannot be empty")
     private String street;
-    @NotNull(message = "Number of street cannot be null")
-    private int numberOfStreet;
+    @NotNull(message = "Number of house cannot be null")
+    private int numberOfHouse;
 
     public Client createClient() {
         return new Client(login, password, name, lastName,
-                new Address(country, city, street, numberOfStreet), dateOfBirth);
+                new Address(country, city, street, numberOfHouse), dateOfBirth);
     }
 }

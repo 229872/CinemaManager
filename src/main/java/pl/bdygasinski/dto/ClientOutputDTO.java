@@ -23,7 +23,7 @@ public class ClientOutputDTO {
         this.login = client.getLogin();
         this.fullName = client.getFullName();
         this.dateOfBirth = client.getDateOfBirth();
-        this.city = client.getAddress().getCity();
-        this.country = client.getAddress().getCountry();
+        this.city = client.getCity();
+        this.country = client.getCountry();
     }
 }

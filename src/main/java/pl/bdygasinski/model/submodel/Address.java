@@ -14,6 +14,6 @@ public class Address {
     private String country;
     private String city;
     private String street;
-    @Column(name = "street_number")
-    private int numberOfStreet;
+    @Column(name = "house_number")
+    private int numberOfHouse;
 }

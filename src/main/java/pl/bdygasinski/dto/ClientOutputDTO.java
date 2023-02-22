@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 public class ClientOutputDTO {
+    private Long id;
     private String login;
     private String fullName;
     private LocalDate dateOfBirth;
@@ -18,6 +19,7 @@ public class ClientOutputDTO {
     private String city;
 
     public ClientOutputDTO(Client client) {
+        this.id = client.getId();
         this.login = client.getLogin();
         this.fullName = client.getFullName();
         this.dateOfBirth = client.getDateOfBirth();

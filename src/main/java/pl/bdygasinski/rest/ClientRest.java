@@ -8,7 +8,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import pl.bdygasinski.dto.ClientInputDTO;
 import pl.bdygasinski.dto.ClientOutputDTO;
-import pl.bdygasinski.exception.ClientNotValidException;
+import pl.bdygasinski.exception.manager.ClientNotFoundManagerException;
+import pl.bdygasinski.exception.manager.ClientNotValidException;
 import pl.bdygasinski.manager.ClientManager;
 
 import java.util.List;
@@ -37,6 +38,19 @@ public class ClientRest {
         } catch (ClientNotValidException e) {
 
             return Response.status(Response.Status.CONFLICT).entity(e.getMessage()).build();
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteClientById(@PathParam("id") Long id) {
+        try {
+            clientManager.deleteClientById(id);
+
+            return Response.noContent().build();
+        } catch (ClientNotFoundManagerException e) {
+
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 }

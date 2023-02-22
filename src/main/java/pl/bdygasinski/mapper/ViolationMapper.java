@@ -1,4 +1,4 @@
-package pl.bdygasinski.exception;
+package pl.bdygasinski.mapper;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;

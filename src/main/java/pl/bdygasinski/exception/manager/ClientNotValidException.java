@@ -1,4 +1,4 @@
-package pl.bdygasinski.exception;
+package pl.bdygasinski.exception.manager;
 
 public class ClientNotValidException extends Exception {
     public ClientNotValidException() {

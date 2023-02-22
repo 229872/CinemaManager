@@ -7,9 +7,12 @@ import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.TransactionalException;
 import org.hibernate.cfg.NotYetImplementedException;
+import pl.bdygasinski.exception.repository.ClientNotFoundRepositoryException;
+import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.model.Client;
 
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class ClientRepository implements Repository<Client> {
@@ -39,8 +42,14 @@ public class ClientRepository implements Repository<Client> {
     }
 
     @Override
-    public Client findById(Long id) throws PersistenceException {
-        return entityManager.find(Client.class, id);
+    public Client findById(Long id) throws ClientNotFoundRepositoryException {
+        try {
+            Client client = entityManager.find(Client.class, id);
+            Objects.requireNonNull(client);
+            return client;
+        } catch (NullPointerException e) {
+            throw new ClientNotFoundRepositoryException("Client not found", e.getCause());
+        }
     }
 
     @Override

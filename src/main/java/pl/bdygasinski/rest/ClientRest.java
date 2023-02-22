@@ -53,4 +53,17 @@ public class ClientRest {
             return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
+
+    @GET
+    @Path("/{id}")
+    public Response findClientById(@PathParam("id") Long id) {
+        try {
+            ClientOutputDTO client = clientManager.findClientById(id);
+
+            return Response.ok(client).build();
+        } catch (ClientNotFoundManagerException e) {
+
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+        }
+    }
 }

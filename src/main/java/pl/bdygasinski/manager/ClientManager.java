@@ -44,4 +44,14 @@ public class ClientManager {
             throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
         }
     }
+
+    public ClientOutputDTO findClientById(Long id) throws ClientNotFoundManagerException {
+        try {
+            Client client = repository.findById(id);
+
+            return new ClientOutputDTO(client);
+        } catch (ClientNotFoundRepositoryException e) {
+            throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
+        }
+    }
 }

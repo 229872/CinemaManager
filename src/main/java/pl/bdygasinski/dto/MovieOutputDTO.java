@@ -10,6 +10,7 @@ import pl.bdygasinski.model.submodel.MovieGenre;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MovieOutputDTO {
+    private Long movie_id;
     private String title;
     private String director;
     private MovieGenre genre;
@@ -18,6 +19,7 @@ public class MovieOutputDTO {
     private double priceForShow;
 
     public MovieOutputDTO(Movie movie) {
+        this.movie_id = movie.getId();
         this.title = movie.getTitle();
         this.director = movie.getDirector();
         this.genre = movie.getGenre();

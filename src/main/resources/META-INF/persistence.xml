@@ -8,7 +8,7 @@
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cinema"/>
-            <property name="jakarta.persistence.jdbc.user" value="bartek"/>
+            <property name="jakarta.persistence.jdbc.user" value="username"/>
             <property name="jakarta.persistence.jdbc.password" value="password"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>

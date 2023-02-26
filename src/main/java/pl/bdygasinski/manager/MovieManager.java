@@ -2,6 +2,7 @@ package pl.bdygasinski.manager;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import pl.bdygasinski.annotation.MovieRepo;
 import pl.bdygasinski.dto.MovieInputDTO;
 import pl.bdygasinski.dto.MovieOutputDTO;
 import pl.bdygasinski.dto.MovieUpdateDTO;
@@ -9,6 +10,7 @@ import pl.bdygasinski.exception.manager.MovieNotFoundManagerException;
 import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.model.Movie;
 import pl.bdygasinski.repository.MovieRepository;
+import pl.bdygasinski.repository.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +18,8 @@ import java.util.stream.Collectors;
 @ApplicationScoped
 public class MovieManager {
     @Inject
-    private MovieRepository repository;
+    @MovieRepo
+    private Repository<Movie> repository;
 
     public MovieOutputDTO createMovie(MovieInputDTO dto) {
         Movie movie = dto.createMovie();

@@ -2,6 +2,9 @@ package pl.bdygasinski.manager;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import pl.bdygasinski.annotation.ClientRepo;
+import pl.bdygasinski.annotation.MovieRepo;
+import pl.bdygasinski.annotation.TicketRepo;
 import pl.bdygasinski.dto.TicketInputDTO;
 import pl.bdygasinski.dto.TicketOutputDTO;
 import pl.bdygasinski.exception.manager.ClientNotFoundManagerException;
@@ -9,6 +12,7 @@ import pl.bdygasinski.exception.manager.MovieNotFoundManagerException;
 import pl.bdygasinski.exception.manager.TicketNotFoundManagerException;
 import pl.bdygasinski.exception.manager.WrongTicketException;
 import pl.bdygasinski.exception.repository.ClientNotFoundRepositoryException;
+import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.exception.repository.MovieNotFoundRepositoryException;
 import pl.bdygasinski.exception.repository.TicketNotFoundRepositoryException;
 import pl.bdygasinski.model.Client;
@@ -16,6 +20,7 @@ import pl.bdygasinski.model.Movie;
 import pl.bdygasinski.model.Ticket;
 import pl.bdygasinski.repository.ClientRepository;
 import pl.bdygasinski.repository.MovieRepository;
+import pl.bdygasinski.repository.Repository;
 import pl.bdygasinski.repository.TicketRepository;
 
 import java.util.List;
@@ -25,11 +30,14 @@ import java.util.stream.Collectors;
 public class TicketManager {
 
     @Inject
-    private TicketRepository ticketRepository;
+    @TicketRepo
+    private Repository<Ticket> ticketRepository;
     @Inject
-    private ClientRepository clientRepository;
+    @ClientRepo
+    private Repository<Client> clientRepository;
     @Inject
-    private MovieRepository movieRepository;
+    @MovieRepo
+    private Repository<Movie> movieRepository;
 
     public TicketOutputDTO createTicket(TicketInputDTO dto) throws ClientNotFoundManagerException,
             MovieNotFoundManagerException, WrongTicketException {
@@ -45,7 +53,7 @@ public class TicketManager {
 
         } catch (ClientNotFoundRepositoryException e) {
             throw new ClientNotFoundManagerException(e.getMessage(), e.getCause());
-        } catch (MovieNotFoundRepositoryException e) {
+        } catch (EntityNotFoundException e) {
             throw new MovieNotFoundManagerException(e.getMessage(), e.getCause());
         }
     }
@@ -57,6 +65,8 @@ public class TicketManager {
 
         } catch (TicketNotFoundRepositoryException e) {
             throw new TicketNotFoundManagerException(e.getMessage(), e.getCause());
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -65,7 +75,7 @@ public class TicketManager {
             Ticket ticket = ticketRepository.findById(id);
             return new TicketOutputDTO(ticket);
 
-        } catch (TicketNotFoundRepositoryException e) {
+        } catch (EntityNotFoundException e) {
             throw new TicketNotFoundManagerException(e.getMessage(), e.getCause());
         }
     }

@@ -3,18 +3,16 @@ package pl.bdygasinski.repository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
-import jakarta.transaction.TransactionalException;
-import org.hibernate.cfg.NotYetImplementedException;
+import pl.bdygasinski.annotation.ClientRepo;
 import pl.bdygasinski.exception.repository.ClientNotFoundRepositoryException;
-import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.model.Client;
 
 import java.util.List;
 import java.util.Objects;
 
 @ApplicationScoped
+@ClientRepo
 public class ClientRepository implements Repository<Client> {
 
     @PersistenceContext(unitName = "postgres")

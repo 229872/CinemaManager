@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pl.bdygasinski.model.Client;
+import static pl.bdygasinski.util.Util.setIfNotNull;
 
 import java.time.LocalDate;
 
@@ -34,73 +35,18 @@ public class ClientUpdateDTO {
     }
 
     private void setValues(Client client) {
-        updatePassword(client);
-        updateName(client);
-        updateLastName(client);
-        updateDateOfBirth(client);
-        updatePhoneNumber(client);
+        setIfNotNull(name, client::setName);
+        setIfNotNull(lastName, client::setLastName);
+        setIfNotNull(password, client::setPassword);
+        setIfNotNull(dateOfBirth, client::setDateOfBirth);
         updateAddress(client);
     }
 
-    private void updatePhoneNumber(Client client) {
-        if (phoneNumber != null) {
-            client.setPhoneNumber(phoneNumber);
-        }
-    }
-
     private void updateAddress(Client client) {
-        updateCountry(client);
-        updateCity(client);
-        updateStreet(client);
-        updateNumberOfHouse(client);
-    }
-
-    private void updateNumberOfHouse(Client client) {
-        if (numberOfHouse != null) {
-            client.setNumberOfHouse(numberOfHouse);
-        }
-    }
-
-    private void updateStreet(Client client) {
-        if (street != null) {
-            client.setStreet(street);
-        }
-    }
-
-    private void updateCity(Client client) {
-        if (city != null) {
-            client.setCity(city);
-        }
-    }
-
-    private void updateCountry(Client client) {
-        if (country != null) {
-            client.setCountry(country);
-        }
-    }
-
-    private void updateDateOfBirth(Client client) {
-        if (dateOfBirth != null) {
-            client.setDateOfBirth(dateOfBirth);
-        }
-    }
-
-    private void updateLastName(Client client) {
-        if (lastName != null) {
-            client.setLastName(lastName);
-        }
-    }
-
-    private void updateName(Client client) {
-        if (name != null) {
-            client.setName(name);
-        }
-    }
-
-    private void updatePassword(Client client) {
-        if (password != null) {
-            client.setPassword(password);
-        }
+        setIfNotNull(numberOfHouse, client::setNumberOfHouse);
+        setIfNotNull(street, client::setStreet);
+        setIfNotNull(city, client::setCity);
+        setIfNotNull(country, client::setCountry);
     }
 
 

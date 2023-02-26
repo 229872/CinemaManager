@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import pl.bdygasinski.mapper.MovieGenreMapper;
 import pl.bdygasinski.model.Movie;
 import pl.bdygasinski.model.submodel.MovieGenre;
+import static pl.bdygasinski.util.Util.setIfNotNull;
 
 @NoArgsConstructor
 @Data
@@ -31,12 +32,12 @@ public class MovieUpdateDTO {
     }
 
     private void setValues(Movie movie) {
-        updateTitle(movie);
-        updateDirector(movie);
+        setIfNotNull(title, movie::setTitle);
+        setIfNotNull(director, movie::setDirector);
         updateGenre(movie);
-        updateAgeRestriction(movie);
-        updateSeatsForShow(movie);
-        updatePriceforShow(movie);
+        setIfNotNull(ageRestriction, movie::setAgeRestriction);
+        setIfNotNull(seatsForShow, movie::setSeatsForShow);
+        setIfNotNull(priceForShow, movie::setPriceForShow);
     }
 
     private void updateGenre(Movie movie) {
@@ -45,36 +46,4 @@ public class MovieUpdateDTO {
             movie.setGenre(genre);
         }
     }
-
-    private void updatePriceforShow(Movie movie) {
-        if (priceForShow != null) {
-            movie.setPriceForShow(priceForShow);
-        }
-    }
-
-    private void updateSeatsForShow(Movie movie) {
-        if (seatsForShow != null) {
-            movie.setSeatsForShow(seatsForShow);
-        }
-    }
-
-    private void updateAgeRestriction(Movie movie) {
-        if (ageRestriction != null) {
-            movie.setAgeRestriction(ageRestriction);
-        }
-    }
-
-    private void updateDirector(Movie movie) {
-        if (director != null) {
-            movie.setDirector(director);
-        }
-    }
-
-    private void updateTitle(Movie movie) {
-        if (title != null) {
-            movie.setTitle(title);
-        }
-    }
-
-
 }

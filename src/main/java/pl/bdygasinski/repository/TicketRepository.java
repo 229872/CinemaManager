@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import pl.bdygasinski.annotation.TicketRepo;
 import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.exception.repository.TicketNotFoundRepositoryException;
 import pl.bdygasinski.model.Ticket;
@@ -12,6 +13,7 @@ import pl.bdygasinski.model.Ticket;
 import java.util.List;
 
 @ApplicationScoped
+@TicketRepo
 public class TicketRepository implements Repository<Ticket> {
 
     @PersistenceContext

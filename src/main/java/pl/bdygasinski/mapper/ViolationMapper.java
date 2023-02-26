@@ -24,7 +24,7 @@ public class ViolationMapper implements ExceptionMapper<ConstraintViolationExcep
 
         JsonObject violationObject = violationsBuilder.build();
         exceptionBuilder.add("violations", violationObject);
-
+        // ok there is bug here, should put exceptionBuilder.build() instead, but works imo better
         return Response.status(Response.Status.EXPECTATION_FAILED).entity(violationObject).build();
     }
 }

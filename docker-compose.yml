@@ -6,7 +6,7 @@ services:
       - '5432:5432'
     environment:
       POSTGRES_DB: cinema
-      POSTGRES_USER: bartek
+      POSTGRES_USER: username
       POSTGRES_PASSWORD: password
     volumes:
       - cinema:/var/lib/postgresql

@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
+import pl.bdygasinski.annotation.MovieRepo;
 import pl.bdygasinski.exception.repository.EntityNotFoundException;
 import pl.bdygasinski.exception.repository.MovieNotFoundRepositoryException;
 import pl.bdygasinski.model.Movie;
@@ -12,6 +13,7 @@ import pl.bdygasinski.model.Movie;
 import java.util.List;
 
 @ApplicationScoped
+@MovieRepo
 public class MovieRepository implements Repository<Movie> {
 
     @PersistenceContext
